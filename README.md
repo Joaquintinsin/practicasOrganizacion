@@ -22,16 +22,14 @@ Ejecutar mediante
 
 # Script
 
-#!/bin/bash
+#~ !/bin/bash
 
-file=$1 # primer argumento pasado por consola
+file=$1 #~ primer argumento pasado por consola
 
-#compilando la libreria principal
-nasm -f elf -d ELF_TYPE asm_io.asm
-#accedo a lo que tiene $file y lo compilo
-nasm -f elf $file.asm
-#compilar final
-gcc -o $file driver.c asm_io.o $file.o
+nasm -f elf -d ELF_TYPE asm_io.asm #~ compilando la libreria principal
+nasm -f elf $file.asm #~ accedo a lo que tiene $file y lo compilo
+gcc -o $file driver.c asm_io.o $file.o #~ compilar final
 
-#para dar permisos de ejecucion chmod +x nombreScript.sh
-#para correr el script ./nombreScript.sh nombreArchivo
+#~ para dar permisos de ejecucion chmod +x nombreScript.sh
+
+#~ para correr el script ./nombreScript.sh nombreArchivo
