@@ -1,0 +1,14 @@
+3. ¿Qué diferencia existe entre el segmento de programa .data y el .bss? Dé un ejemplo que muestre la utilidad de cada uno.
+
+.data es un segmento de código que va a contener variables inicializadas con valores dados
+.bss es un segmento de código en dónde van a alojarse variables que no tienen inicialización
+
+segment .data
+    L1 db 1
+    L2 dw 10b
+    L3 dd 15Fh
+
+segment .bss
+    L4 resb 64
+    L5 resd 1
+    L6 resq 1
