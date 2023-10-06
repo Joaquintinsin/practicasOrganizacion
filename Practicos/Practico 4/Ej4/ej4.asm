@@ -10,8 +10,8 @@ segment .data
     L3 db 4
 
 segment .text
-global main_ej4
-main_ej4:
+global asm_main
+asm_main:
     xor eax, eax
     xor ebx, ebx
     

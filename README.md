@@ -33,3 +33,20 @@ gcc -o $file driver.c asm_io.o $file.o #~ compilar final
 #~ para dar permisos de ejecucion chmod +x nombreScript.sh
 
 #~ para correr el script ./nombreScript.sh nombreArchivo
+
+# Summary Compilación
+1. Compilar asm_io.asm  (La biblioteca principal con extensión assembler)
+    nasm -f elf -d ELF_TYPE asm_io.asm
+2. Tener asm_io.inc en la misma carpeta que el programa
+3. Compilar el programa
+    nasm -f elf programa.asm
+4. Tener driver.c en la misma carpeta que el programa
+5. Verificar que la funcion que llama driver.c se llame igual que en el programa
+    Si (driver.c llama a asm_main())
+        programa.asm use asm_main:
+            segment .text
+            global asm_main:
+            asm_main:
+                ...
+6. Compilar el driver+(los objetos assembler)
+    gcc -o ejecutable driver.c asm_io.o programa.o
