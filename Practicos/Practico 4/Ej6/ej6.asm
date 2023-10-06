@@ -6,7 +6,7 @@
 %include "asm_io.inc"
 
 segment .data
-    word_Arr dw 0,1,2,3,4,5,6,7,8,9
+    word_Arr dw 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
     
 segment .text
 global asm_main:
@@ -15,12 +15,23 @@ asm_main:
     xor ebx, ebx
     xor ecx, ecx
     
-    mov eax, 0
+    mov ebx, 0
 mientras:
-    cmp eax, 9	; ZF = (eax-9 == 0)? 1 : 0
-    jg fmientras
-
+    cmp ebx, 9		; ZF = (ebx-9 == 0)? 1 : 0
+    jg fmientras 	; Jump fmientras <--> ZF = 1
+    mov al, [word_Arr + ebx*2]
+    and al, 2
+    jz esPar
+    jmp esImpar
+esImpar:
+    inc ebx
+    jmp mientras
+esPar:
+    add cl, al
+    inc ebx
+    jmp mientras
 fmientras:
-    
-    
+    mov al, cl
+    call print_int
+    call print_nl
     ret
