@@ -7,28 +7,23 @@
 
 segment .data
     word_Arr dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+    res_Suma db 0
     
 segment .text
-global asm_main:
+global asm_main
 asm_main:
     xor eax, eax
     xor ebx, ebx
-    xor ecx, ecx
+    xor ecx, 10		; Son 10 elementos del arreglo, y utilizo el ecx para que el loop cicle 10 veces
 mientras:
-    cmp ebx, 9		; ZF = (ebx-9 == 0)? 1 : 0
-    jg fmientras 	; Jump fmientras <--> ZF = 1
-    mov al, [word_Arr + ebx*2]
-    jp esPar
-    jmp esImpar
-esPar:
-    add cl, al
-    inc ebx
-    jmp mientras
+    mov al, [word_Arr + ecx*2]
+    test al, 1
+    jnz esImpar
+    add byte [res_Suma], al
 esImpar:
-    inc ebx
-    jmp mientras
-fmientras:
-    mov al, cl
+    loop mientras
+
+    mov al, [res_Suma]
     call print_int
     call print_nl
     ret
