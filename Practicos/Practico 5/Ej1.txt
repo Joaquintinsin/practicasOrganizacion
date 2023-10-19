@@ -1,0 +1,157 @@
+a,b,c) Definicion de Hardware, Instrucciones, Microinstrucciones:
+    Registros:
+        nombre  tamaño
+        pc      12
+        acc     16
+        ir      16
+        mar     12
+        mdr     16
+        status  3
+    ConditionBit:
+        halt-bit usa registro status y es el bit 0 que termina el programa
+    RAM:
+        nombre  tamaño  cantBitsPorCelda
+        Main    128     8
+
+Instrucciones:
+    read
+        Microinstrucciones:
+            input-int -> acc
+            End
+    jmpn
+        Microinstrucciones:
+            if (acc >= 0) skip-1
+            ir (4-15) -> pc
+            End
+    add
+        Microinstrucciones:
+            ir (4-15) -> mar
+            Main[mar] -> mdr
+            acc + mdr -> acc
+            End
+    store
+        Microinstrucciones:
+            ir (4-15) -> mar
+            acc -> mdr
+            mdr -> Main[mar]
+            End
+    jump
+        Microinstrucciones:
+            ir (4-15) -> pc
+            End
+    load (trae de memoria y lo guarda en acc)
+        Microinstrucciones:
+            ir (4-15) -> mar  (es la memoria. del bit 4 al 15 es la memoria utilizable)
+            Main[mar] -> mdr
+            mdr -> acc
+            End
+    write
+        Microinstrucciones:
+            output-acc -> int
+            End
+    stop
+        Microinstrucciones:
+            set-halt-bit
+            End
+    substract
+        Microinstrucciones:
+            ir (4-15) -> mar
+            Main[mar] -> mdr
+            acc-mdr -> acc
+            End
+    multiply
+        Microinstrucciones:
+            ir (4-15) -> mar
+            Main[mar] -> mdr
+            acc*mdr -> acc
+            End
+    divide
+        Microinstrucciones:
+            ir (4-15) -> mar
+            Main[mar] -> mdr
+            acc/mdr -> acc
+            End
+    jmpz
+        Microinstrucciones:
+            if (acc != 0) skip-1
+            ir (4-15) -> pc
+            End
+
+d) Tiene 128mb de ram.
+Modify -> Hardware modules -> Type of module: RAM
+
+e) Hay 4 bits para el código de operación y el operando tiene 12.
+    Una dirección de memoria tiene 12 bits.
+
+f) Solo hay un registro de proposito general (acc) y va usando mar y mdr junto con la memoria Main
+
+g) Vamos a utilizar mar como un puente entre la direccion de memoria (en la memoria) y el registro de proposito general.
+    mdr tiene la misma utilidad, pero uno se conecta directamente de lo que viene de la memoria y el otro directamente 
+    del registro de propósito general.
+    Se pueden modificar (de memoria a mar o de mar a memoria) (de registro general a mdr o de mdr a registro general).
+
+
+2) El programa es un ciclo que pide números positivos y los suma todos. Al ingresar un número negativo el programa termina.
+  Inicializa una variable sum en 0 (Modulo sum)
+  Modulo Start:
+    Lee de consola un entero
+    Si lo que leyó es negativo, salta a Done
+    Adiciona la variable sum al registro de propósito general acc
+    Almacena lo que hay en el registro acc en la variable sum
+    Salta a Start
+  Modulo Done:
+    Carga en el registro acc lo que hay en la variable sum
+    Escribe en consola lo que tiene el registro acc
+    Termina
+  
+3)
+Start:
+	read          ; read n -> acc
+	jmpn Done   	; jump to Done if n < 0.
+
+	add sum
+	store sum 	  ; store the new sum
+
+	load contador
+	add uno
+	store contador
+
+	jump Start	  ; go back & read in next number
+Done:
+	load sum     	; load the final sum
+	write 		    ; write the final sum
+	load contador
+	write
+	stop       		; stop
+sum:
+	.data 2 0     ; 2-byte location where sum is stored
+contador:
+	.data 2 0
+uno:
+	.data 2 1
+
+
+4) Para agregar la instrucción de saltar por mayor o igual:
+name  opcode  format
+mayig C       op addr
+  Implementa
+    ir(4-15)->mar
+    Main[mar]->mdr
+    acc-mdr->acc
+    if(acc<=0)skip-1
+    ir(4-15)->pc
+    End
+jg    D       op unused
+  Implementa
+    if(acc<=0)skip-1
+    ir(4-15)->pc
+    End
+
+5) Direccionar sobre las operaciones
+  
+
+
+
+
+
+
