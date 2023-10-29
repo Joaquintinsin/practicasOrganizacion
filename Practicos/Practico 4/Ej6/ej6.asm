@@ -7,17 +7,17 @@
 
 segment .data
     word_Arr dw 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+    word_Byte db 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
     res_Suma db 0
-    
 segment .text
 global asm_main
 asm_main:
     xor eax, eax
     xor ebx, ebx
-    xor ecx, 10		; Son 10 elementos del arreglo, y utilizo el ecx para que el loop cicle 10 veces
+    mov ecx, 10		; Son 10 elementos del arreglo, y utilizo el ecx para que el loop cicle 10 veces
 mientras:
-    mov al, [word_Arr + ecx*2]
-    test al, 1
+    mov al, [word_Arr + 2*ecx]
+    cmp al, 2
     jnz esImpar
     add byte [res_Suma], al
 esImpar:
