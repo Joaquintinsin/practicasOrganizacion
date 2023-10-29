@@ -1,0 +1,8 @@
+Para entregar el TPO, SOLO UN integrante del grupo debe subir un archivo comprimido conteniendo: 
+el archivo correspondiente a la máquina creada, 
+dos archivos de los ejemplos y 
+un archivo de texto con la siguiente información: 
+    Version de CPUSim utilizada, 
+    integrantes del grupo y 
+    toda información adicional que consideren que necesitemos analizar. 
+    (Por ejemplo breve explicación de los instrucciones incorporadas y cómo utilizarlas.)

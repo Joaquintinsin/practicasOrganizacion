@@ -1,0 +1,30 @@
+; Factorial
+
+Start:
+    read ; obtengo n, 
+    push ; apilo el parametro n
+    call Fact
+    write ; escribo el resultado
+    pop ;quito el parametro
+    stop
+
+Fact:
+    loadparam 2; cargo el n acutal
+    subtract uno; comparo con uno
+    jmpz fin ; caso base
+    loadparam 2; cargo el parametro
+    subtract uno; le resto uno
+    push ;lo apilo para la llamada 
+    call Fact; llamada recursiva
+    store tmp; guardo el resultado tmp
+    pop ; desapilo el parametro
+    loadparam 2; cargo el paramtro n
+    multiply tmp; multiplico por tmp
+    ret ; retorno ACC resultado
+
+    fin:
+    load uno; dejo el resultado 1
+    ret; retorno
+
+uno:  .data 2,1
+tmp:  .data 2,0
