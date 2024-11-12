@@ -1,0 +1,18 @@
+TRABAJO PRACTICO OBLIGATORIO - ORGANIZACION DEL PROCESADOR
+
+Versión utilizada de CPUSim: 3.9.0
+
+Integrantes: De Pasquale, Bruno
+             Tissera, Joaquín
+             Oviedo, Francisco
+             
+Info. adicional:
+	- Agregamos un reg. llamado SP que se encarga de guardar la direcc. del tope de la pila.
+	- Listado de microinstrucciones nuevas:
+		-SPinit ; Asigna el valor 128 a SP para inicializar el tope de la pila afuera de la memoria.  		
+		-clearmdr ; Asigna el valor 0 a mdr para no tener conflictos cuando interactua con regs. de menor tamaño.
+		-Dec2-SP ; Decrementa el valor de SP en 2 para apuntar a la nueva direccion del tope de la pila, usada en push y call. 
+		-Inc2-SP ; Incrementa el valor de SP en 2 para apuntar a la nueva direccion del tope de la pila, usada en pop y ret.
+		-SP+mdr -> mar ; Suma la direccion actual del SP con el valor del mdr para llevarlo a mar, usado en loadparam.
+		-Main[SP] -> mdr ; Carga en mdr la informacion contenida en el tope de la pila, usada en ret y pop.
+		-mdr -> Main[SP] ; Carga en el tope de la pila el valor de mdr, usada en call, ret, pop y push.

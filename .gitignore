@@ -3,3 +3,35 @@
 /Practicos/Practico\ 4/zztest
 /Practicos/algoritmoDeBooth.txt
 /Practicos/Practico\ 4/terminal\ cosas.txt
+
+# Archivos de salida del ensamblador (binarios, ejecutables)
+*.o
+*.out
+*.exe
+*.bin
+*.elf
+
+# Archivos de depuración
+*.dSYM/
+*.map
+*.lst
+*.lss
+*.sym
+
+# Archivos de logs y temporales
+*.log
+*.tmp
+*.bak
+
+# Archivos de core dumps
+core
+
+# Archivos específicos de editores
+*.swp
+*.swo
+*~
+.*.sw?
+
+# Directorios de compilación (opcional, si tienes un build/ o similar)
+build/
+dist/

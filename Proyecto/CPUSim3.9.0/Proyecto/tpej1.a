@@ -1,0 +1,24 @@
+start:Init	;Inicializa el SP en 128
+read		;Pide el primer numero
+push		;Apila el primer numero
+read		;Pide el segundo numero
+push		;Apila el segundo numero
+call sum	;Llama a la subrutina "sum"
+pop		;Desapila el segundo numero
+pop		;Desapila el primer numero
+load res	;Carga el acc con el valor de res
+write		;Muestra por pantalla el resultado
+stop		;Termina el programa
+
+
+sum:
+	loadparam 2	;Carga el segundo num en el acc
+	add res		;Suma acc con res y lo deja en acc
+	store res	;Guarda lo que hay en acc en res
+	loadparam 4	;Carga el primer num en el acc
+	add res		;Suma acc con res y lo deja en acc
+	store res	;Guarda lo que hay en acc en res
+	ret		;Termina la subrutina
+
+
+res: .data 2 0		;Variable auxiliar para resultado de operaciones(inicializada en 0)
